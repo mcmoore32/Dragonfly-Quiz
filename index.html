@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dragonfly ID Quiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+  </head>
+
+  <body>
+
+    <header class='row'>
+      Dragonfly ID Quiz
+    </header>
+
+    <!--HTML for hero page-->
+
+    <main class="row hero js-hero">
+      <button class="js-hero-button" type="button">
+        Click to Begin Quiz
+      </button>
+    </main>
+
+    <!--Alternative HTML for quiz page-->
+
+    <main class="row quiz-page js-quiz-page hideMe">
+
+      <div class="image-container col50">
+        <img class= "js-quiz-image" src="" alt="">
+      </div>
+
+      <div class="question-container col50">
+        <form class="js-answers">
+          <!--Dynamically generated in javascript-->
+        </form>
+      </div>
+
+      <button class="correct js-correct hideMe" type="button">
+        Correct!
+      </button>
+
+      <button class="wrong js-wrong hideMe" type="button">
+        <p>Incorrect</p>
+        <p id="js-correct-answer"></p>
+      </button>
+
+      <button class="js-quiz-button hideMe" type="button">
+        Click here to advance
+      </button>
+
+      <footer>
+        <p id='left-footer'>Question 1/10</p>
+        <p id='right-footer'>2/10 Correct</p>
+      </footer>
+    </main>
+
+    <!--Alternative HTML for last page-->
+
+    <main class="row last-page js-last-page hideMe">
+
+      <div id="results-report">
+        <p>Total Score:</p>
+        <p class="js-total-score">7/10</p>
+      </div>
+      <button class="js-last-page-button" type="button">
+        Click to Take Quiz Again
+      </button>
+
+    </main>
+
+    <!-- Javascript Libraries and Scripts -->
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+
+  </body>
+</html>

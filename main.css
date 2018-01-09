@@ -1,0 +1,151 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: lightgray;
+}
+
+.row {
+  max-width: 1200px;
+  margin: 0px auto;
+}
+
+header {
+  background-color: #2a9126;
+  height: 100px;
+  font-size: 4rem;
+  text-align: center;
+  padding-top: 10px;
+  color: #e3ffe2;
+}
+
+.hideMe {
+  display: none;
+}
+
+main {
+  position: relative;
+  background-color: #aad1a9;
+  height: 800px;
+}
+
+.hero {
+  background-image: url(img/GoldenWingedSkimmer.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+.last-page {
+  background-image: url(img/PaintedSkimmer.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+button {
+  position: absolute;
+  width: 600px;
+  top: 600px;
+  left: 300px;
+  height: 80px;
+  border-radius: 20px;
+  background: #e3ffe2;
+  font-size: 2rem;
+  border: 0px;
+}
+
+.col50 {
+  width: 48%;
+  float: left;
+}
+
+.image-container {
+  height: 400px;
+  margin-top: 50px;
+  padding: 15px;
+}
+
+.question-container {
+  height: 400px;
+  margin-top: 50px;
+  padding: 40px 80px;
+  font-size: 2rem;
+  line-height: 4rem;
+}
+
+input[type=radio] {
+  border: 0px;
+  width: 5%;
+  height: 1em;
+  padding-top: 100px;
+  vertical-align: middle;
+}
+
+.image-container img {
+  width: 90%;
+  float: right;
+}
+
+.correct {
+  top: 500px;
+  background-color: #2a9126;
+  color: #e3ffe2;
+  border-radius: 0px;
+}
+
+.wrong {
+  top: 450px;
+  background-color: #ff1d1d;
+  color: #e3ffe2;
+  border-radius: 0px;
+  height: 130px;
+}
+
+.wrong p {
+  line-height: 3rem;
+}
+
+footer {
+  position: absolute;
+  clear: both;
+  margin-top: 750px;
+  width: 100%;
+  height: 50px;
+  background-color: #2a9126;
+}
+
+#left-footer {
+  display: inline-block;
+  float: left;
+  width: 200px;
+  color: #e3ffe2;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+#right-footer {
+  display: inline-block;
+  float: right;
+  width: 160px;
+  color: #e3ffe2;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+#results-report {
+  position: absolute;
+  top: 250px;
+  left: 300px;
+  background-color: rgba(42, 145, 38, 0.7);
+  height: 200px;
+  width: 600px;
+  color: #e3ffe2;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 4rem;
+  text-align: center;
+  padding-top: 40px;
+}
