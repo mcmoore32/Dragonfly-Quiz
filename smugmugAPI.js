@@ -17,23 +17,29 @@ var quizState = {
   returnedRawImageEndpoint: "",
   correctAnswer: "",
   imageArrayNumber: 0,
-  questionAnswers: []
+  questionAnswers: [],
+  currentQuestionNumberKey: 0,
+  questionNumberArray: ['question1', 'question2', 'question3', 'question4', 'question5', 'question6', 'question7', 'question8', 'question9', 'question10']
 }
+
+var questionObject = {
+  'question1': [],
+  'question2': [],
+  'question3': [],
+  'question4': [],
+  'question5': [],
+  'question6': [],
+  'question7': [],
+  'question8': [],
+  'question9': [],
+  'question10': []
+}
+
+var incr = 0;
 
 //array of all possible answers
 //used to generate wrong answers for a particular question
 var answers = ['Sparkling Jewelwing', 'Ebony Jewelwing', 'American Rubyspot', 'Great Spreadwing', 'Southern Spreadwing', 'Spotted Spreadwing', 'Amber-winged Spreadwing', 'Sweetflag Spreadwing', 'Elegant Spreadwing', 'Slender Spreadwing', 'Swamp Spreadwing', 'Eastern Red Damsel', 'Blue-fronted Dancer', 'Seepage Dancer', 'Variable Dancer', 'Powdered Dancer', 'Blue-ringed Dancer', 'Blue-tipped Dancer', 'Dusky Dancer', 'Aurora Damsel', 'Azure Bluet', 'Double-striped Bluet', 'Familiar Bluet', 'Attenuated Bluet', 'Turquoise Bluet', 'Atlantic Bluet', 'Burgundy Bluet', 'Big Bluet', 'Stream Bluet', 'Skimming Bluet', 'Pale Bluet', 'Orange Bluet', 'Slender Bluet', 'Vesper Bluet', 'Blackwater Bluet', 'Citrine Forktail', 'Lilypad Forktail', 'Fragile Forktail', 'Furtive Forktail', 'Ramburs Forktail', 'Eastern Forktail', 'Sphagnum Sprite', 'Southern Sprite', 'Duckweed Firetail', 'Gray Petaltail', 'Black-tipped Darner', 'Shadow Darner', 'Green-striped Darner', 'Spatterdock Darner', 'Common Green Darner', 'Comet Darner', 'Springtime Darner', 'Fawn Darner', 'Regal Darner', 'Swamp Darner', 'Taper-tailed Darner', 'Harlequin Darner', 'Twilight Darner', 'Cyrano Darner', 'Unicorn Clubtail', 'Black-shouldered Spinyleg', 'Banner Clubtail', 'Lancet Clubtail', 'Midland Clubtail', 'Ashy Clubtail', 'Sable Clubtail', 'Dragonhunter', 'Southern Pygmy Clubtail', 'Appalachian Snaketail', 'Common Sanddragon', 'Eastern Least Clubtail', 'Lauras Clubtail', 'Russet-tipped Clubtail', 'Arrow Clubtail', 'Brown Spiketail', 'Delta-spotted Spiketail', 'Tiger Spiketail', 'Twin-spotted Spiketail', 'Arrowhead Spiketail', 'Stream Cruiser', 'Illinois Swift River Cruiser', 'Georgia Swift River Cruiser', 'Royal River Cruiser', 'Petite Emerald', 'Slender Baskettail', 'Common Baskettail', 'Prince Baskettail', 'Mantled Baskettail', 'Robust Baskettail', 'Selys Sundragon', 'Umber Shadowdragon', 'Stygian Shadowdragon', 'Fine-lined Emerald', 'Coppery Emerald', 'Mocha Emerald', 'Treetop Emerald', 'Clamp-tipped Emerald', 'Four-spotted Pennant', 'Calico Pennant', 'Halloween Pennant', 'Banded Pennant', 'Marthas Pennant', 'Double-ringed Pennant', 'Eastern Pondhawk', 'Seaside Dragonlet', 'Little Blue Dragonlet', 'Blue Corporal', 'Dot-tailed Whiteface', 'Golden-winged Skimmer', 'Bar-winged Skimmer', 'Spangled Skimmer', 'Yellow-sided Skimmer', 'Slaty Skimmer', 'Widow Skimmer', 'Needhams Skimmer', 'Twelve-spotted Skimmer', 'Painted Skimmer', 'Great Blue Skimmer', 'Elfin Skimmer', 'Roseate Skimmer', 'Blue Dasher', 'Wandering Glider', 'Spot-winged Glider', 'Eastern Amberwing', 'Common Whitetail', 'Blue-faced Meadowhawk', 'Cherry-faced Meadowhawk', 'Ruby Meadowhawk', 'Band-winged Meadowhawk', 'Autumn Meadowhawk', 'Striped Saddlebags', 'Carolina Saddlebags', 'Black Saddlebags', 'Red Saddlebags'];
-
-
-
-
-//junk
-//HTML template to be added dynamically to show results
-/*var RESULT_HTML_TEMPLATE = (
-  '<div class="results-div">' +
-  '<div class="img-container"><img class="tnail js-thumbnail" src="" alt=""></div>' +
-  '<h3 class="js-title"></h3></div>'
-);*/
 
 
 
@@ -48,8 +54,14 @@ function getImageFromApi() {
     console.log(returnedText);
     quizState.jsonText = returnedText;
     getEndPoints();
+    incr = 0;
   });
 }
+
+
+//BEGINNING OF LOOP TO GENERATE MULTIPLE QUETIONS
+
+
 
 //Original JSON file contains endpoints that have to be used to get the adtual image URLs and name of the album to use as the correct answer.  This functions makes additional JSON requests to those endpoints
 function getEndPoints () {
@@ -66,28 +78,29 @@ function getEndPoints () {
   quizState.returnedRawImageEndpoint = 'https://www.smugmug.com' + quizState.jsonText.Response.Image[quizState.imageArrayNumber].Uris.ImageSizeDetails.Uri;
   quizState.returnedAlbumUri = quizState.jsonText.Response.Image[quizState.imageArrayNumber].Uris.ImageAlbum.Uri;
   quizState.returnedAlbumUri = 'https://www.smugmug.com' + quizState.returnedAlbumUri;
-  getRawImage();
+  getImageUrl();
 }
 
-//This get the URL for the image in XLarge size using the endpoint from getEndPoints
-function getRawImage () {
+//This getS the URL for the image in XLarge size using the endpoint from getEndPoints
+function getImageUrl () {
   var query3 = {
     APIKey: 'pq4nxcZNwNc8dLc43cK72X27H2Vnt9Q2'
   }
   $.getJSON(quizState.returnedRawImageEndpoint, query3, function(returnedText) {
     quizState.quizImage = returnedText.Response.ImageSizeDetails.ImageSizeXLarge.Url;
+    //testing
+    questionObject[quizState.questionNumberArray[incr]].push(quizState.quizImage);
     getAlbumNameFromApi();
   });
 }
 
-//This get the folder name for the image using the endpoint from getEndPoints - this is the corret answer
+//This gets the folder name for the image using the endpoint from getEndPoints - this is the corret answer
 function getAlbumNameFromApi () {
   var query2 = {
     APIKey: 'pq4nxcZNwNc8dLc43cK72X27H2Vnt9Q2'
   }
   $.getJSON(quizState.returnedAlbumUri, query2, function(returnedText) {
     quizState.correctAnswer = returnedText.Response.Album.Title;
-    console.log('Correct Answer: ' + quizState.correctAnswer);
     renderResult();
   });
 }
@@ -102,6 +115,7 @@ function renderResult() {
 //Generates a set of 10 possible answers for the muliple choice question in random order
 //uses the answers array which has the name of all possible species
 function getRandomAnswers () {
+  quizState.questionAnswers = [];
   //Generates 10 unique random numbers in the range from 0-133
   while (quizState.questionAnswers.length < 10){
     var randomnumber = Math.floor(Math.random()*133);
@@ -127,10 +141,17 @@ function getRandomAnswers () {
   }
   for (i=0; i<quizState.questionAnswers.length; i++) {
     console.log(i + ": " + quizState.questionAnswers[i]);
+    questionObject[quizState.questionNumberArray[incr]].push(quizState.questionAnswers[i]);
   };
-
+  questionObject[quizState.questionNumberArray[incr]].push(quizState.correctAnswer);
+  console.log('question is: ' + questionObject[quizState.questionNumberArray[incr]]);
+  incr++;
+  if (incr < 10) {
+    getEndPoints();
+  }
 }
 
+// END OF FOR LOOP FOR EACH QUESTION
 
 //Event listener for submit, gets user search term and assigns it to variable
 /*function watchSubmit() {
