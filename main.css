@@ -57,8 +57,13 @@ button {
   border: 0px;
 }
 
-.col50 {
-  width: 48%;
+.col60 {
+  width: 59%;
+  float: left;
+}
+
+.col40 {
+  width: 39%;
   float: left;
 }
 
@@ -71,34 +76,34 @@ button {
 .question-container {
   height: 400px;
   margin-top: 50px;
-  padding: 40px 80px;
-  font-size: 2rem;
-  line-height: 4rem;
+  padding: 10px 40px;
+  font-size: 1.7rem;
+  line-height: 3.2rem;
 }
 
 input[type=radio] {
   border: 0px;
   width: 5%;
-  height: 1em;
+  height: 1.2em;
   padding-top: 100px;
-  vertical-align: middle;
+  vertical-align: text-bottom;
 }
 
 .image-container img {
-  width: 90%;
+  width: 100%;
   float: right;
 }
 
 .correct {
   top: 500px;
-  background-color: #2a9126;
+  background-color: rgba(42, 145, 38, 0.8);
   color: #e3ffe2;
   border-radius: 0px;
 }
 
 .wrong {
   top: 450px;
-  background-color: #ff1d1d;
+  background-color: rgba(255, 29, 29, 0.8);
   color: #e3ffe2;
   border-radius: 0px;
   height: 130px;
