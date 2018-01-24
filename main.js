@@ -113,7 +113,7 @@ function renderQuizPage (pageNumber){
     $('#right-footer').text(numberCorrect + '/' + (pageNumber-1) + ' Correct');
 
     //Listen to input and mark Correct or Incorrect
-    $('input[type=radio][name=dragon]').change(function() {
+    $('input[type=radio][name=dragon]').change(function(event) {
       event.preventDefault();
       if (this.value === questionObject[arrayOfKeys[currentKey]][11]) {
         $('.js-correct').removeClass('hideMe');
@@ -163,6 +163,7 @@ function getImageFromApi() {
     quizState.jsonText = returnedText;
     incr = 0;
     getEndPoints();
+    $('.js-hero-button')[0].value = 'Click to start quiz';
   });
 }
 
