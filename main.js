@@ -55,10 +55,7 @@ function renderHeroPage (){
   $('.js-hero').removeClass('hideMe');
   $('.js-quiz-page').addClass('hideMe');
   $('.js-last-page').addClass('hideMe');
-  $('.js-hero-button').click(function(){
-    numberCorrect = 0;
-    renderQuizPage(0);
-  })
+
 };
 
 //renders the page at the end of the quiz
@@ -163,7 +160,12 @@ function getImageFromApi() {
     quizState.jsonText = returnedText;
     incr = 0;
     getEndPoints();
-    $('.js-hero-button')[0].value = 'Click to start quiz';
+    el = $('.js-hero-button')[0];
+    el.innerText = "Click to start quiz";
+    $('.js-hero-button').click(function(){
+    numberCorrect = 0;
+    renderQuizPage(0);
+  })
   });
 }
 
